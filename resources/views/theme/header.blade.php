@@ -24,7 +24,7 @@ $categories = \App\Models\Category::all();
                 @if(count($categories) > 0)
                 @foreach ($categories as $category)
                    <li class="nav-item"><a class="nav-link" 
-                    href="{{ route('theme.category') }}">{{ $category->name}}</a></li>
+                    href="{{ route('theme.category' ,['id' => $category->id]) }}">{{ $category->name}}</a></li>
                 @endforeach
                 @endif
                 </ul>
@@ -47,15 +47,20 @@ $categories = \App\Models\Category::all();
                   aria-expanded="false">{{ Auth::user()->name }}</a>
                 <ul class="dropdown-menu">
                   <li class="nav-item">
-                    <button type="submit" class="nav-link">My Product</button>
+
+                    <a href="{{ route('my_product') }}" class="nav-link">My Product</a>
                   </li>
 
 
                   <li class="nav-item">
-                    <form action="{{ route('logout') }}" method="post">
-                      @csrf
-                    <button type="submit" class="nav-link" >Log Out</button>
-                    </form>
+                      <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                          @csrf
+                      </form>
+                      
+                      <a class="nav-link" href="javascript:void(0)" 
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                          Log Out
+                      </a>
                   </li>
                 </ul>
               </li> 

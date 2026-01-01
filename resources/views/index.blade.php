@@ -115,7 +115,7 @@
                             </a>
                             <p>{{$product->description}}</p>
                             <p>{{$product->price}} $</p>
-                            <a class="button" href="#">Read More <i class="ti-arrow-right"></i></a>
+                            <a class="button" href="{{ route('products.show',['product' => $product])}}">Read More <i class="ti-arrow-right"></i></a>
                              
                         </div>
                 </div>
