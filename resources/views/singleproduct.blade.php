@@ -28,7 +28,7 @@
                 <p>{{$product->description}}</p>
                   <p>{{$product->price}} $ </p>
                 </div>
-          @if(count($product->rates) >0)
+          @if(count($product->rates) > 0 )
               <div class="comments-area">
                   <h4>{{ count($product->rates) }} Comments</h4>
                     @foreach ($product->rates as  $rate )

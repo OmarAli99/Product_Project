@@ -25,67 +25,21 @@
         <!--================ Blog slider start =================-->  
         <section>
         <div class="container">
+            @if(count($lastproducts) > 0 )
             <div class="owl-carousel owl-theme blog-slider">
+            @foreach ($lastproducts as $product )             
             <div class="card blog__slide text-center">
                 <div class="blog__slide__img">
-                <img class="card-img rounded-0" src="{{asset("assets/img")}}/blog/blog-slider/blog-slide1.png" alt="">
+                <img class="card-img rounded-0" src="{{ asset('storage/' . $product->image) }}" alt="">
                 </div>
                 <div class="blog__slide__content">
-                <a class="blog__slide__label" href="#">Fashion</a>
-                <h3><a href="#">New york fashion week's continued the evolution</a></h3>
-                <p>2 days ago</p>
+                <a class="blog__slide__label" href="{{route('products.show',['product' => $product])  }}">{{ $product->name }}</a>
+                <h3><a href="#">{{ $product->description }}</a></h3>
+                <p>{{ $product->price }}</p>
                 </div>
             </div>
-            <div class="card blog__slide text-center">
-                <div class="blog__slide__img">
-                <img class="card-img rounded-0" src="{{asset("assets/img")}}/blog/blog-slider/blog-slide2.png" alt="">
-                </div>
-                <div class="blog__slide__content">
-                <a class="blog__slide__label" href="#">Fashion</a>
-                <h3><a href="#">New york fashion week's continued the evolution</a></h3>
-                <p>2 days ago</p>
-                </div>
-            </div>
-            <div class="card blog__slide text-center">
-                <div class="blog__slide__img">
-                <img class="card-img rounded-0" src="{{asset("assets/img")}}/blog/blog-slider/blog-slide3.png" alt="">
-                </div>
-                <div class="blog__slide__content">
-                <a class="blog__slide__label" href="#">Fashion</a>
-                <h3><a href="#">New york fashion week's continued the evolution</a></h3>
-                <p>2 days ago</p>
-                </div>
-            </div>
-            <div class="card blog__slide text-center">
-                <div class="blog__slide__img">
-                <img class="card-img rounded-0" src="{{asset("assets/img")}}/blog/blog-slider/blog-slide1.png" alt="">
-                </div>
-                <div class="blog__slide__content">
-                <a class="blog__slide__label" href="#">Fashion</a>
-                <h3><a href="#">New york fashion week's continued the evolution</a></h3>
-                <p>2 days ago</p>
-                </div>
-            </div>
-            <div class="card blog__slide text-center">
-                <div class="blog__slide__img">
-                <img class="card-img rounded-0" src="{{asset("assets/img")}}/blog/blog-slider/blog-slide2.png" alt="">
-                </div>
-                <div class="blog__slide__content">
-                <a class="blog__slide__label" href="#">Fashion</a>
-                <h3><a href="#">New york fashion week's continued the evolution</a></h3>
-                <p>2 days ago</p>
-                </div>
-            </div>
-            <div class="card blog__slide text-center">
-                <div class="blog__slide__img">
-                <img class="card-img rounded-0" src="{{asset("assets/img")}}/blog/blog-slider/blog-slide3.png" alt="">
-                </div>
-                <div class="blog__slide__content">
-                <a class="blog__slide__label" href="#">Fashion</a>
-                <h3><a href="#">New york fashion week's continued the evolution</a></h3>
-                <p>2 days ago</p>
-                </div>
-            </div>
+            @endforeach
+            @endif
             </div>
         </div>
         </section>
@@ -105,7 +59,7 @@
                                                              
                                 <li><a href="#"><i class="ti-user"></i>{{ $product->user->name }}</a></li>
                                 <li><a href="#"><i class="ti-notepad"></i>{{ $product->created_at}}</a></li>
-                                <li><a href="#"><i class="ti-themify-favicon"></i>2 Comments</a></li>
+                                <li><a href="#"><i class="ti-themify-favicon"></i>{{ count($product->rates) }}</a></li>
                                
                             </ul> 
                         </div>

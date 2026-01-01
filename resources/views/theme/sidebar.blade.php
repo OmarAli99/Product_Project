@@ -1,7 +1,7 @@
 <?php  
 
 $categories= \App\Models\Category::all();
-
+$lastproducts= \App\Models\Product::latest()->take(3)->get();
 ?>
 
 <!-- Start Blog Post Siddebar -->
@@ -40,7 +40,7 @@ $categories= \App\Models\Category::all();
                         <li>
                         <a href="{{ route('theme.category',['id' => $category->id])}}" class="d-flex justify-content-between">
                             <p>{{ $category->name }}</p>
-                            <p>(03)</p>
+                            <p>({{ count($category->products) }})</p>
                         </a>
                         </li>
                          @endforeach
@@ -51,50 +51,25 @@ $categories= \App\Models\Category::all();
                     <div class="single-sidebar-widget popular-post-widget">
                     <h4 class="single-sidebar-widget__title">Recent Post</h4>
                     <div class="popular-post-list">
+                        @if(count($lastproducts) > 0 )
+                         @foreach ($lastproducts as $product )             
+
                         <div class="single-post-list">
                         <div class="thumb">
-                            <img class="card-img rounded-0" src="{{asset("assets/img")}}/blog/thumb/thumb1.png" alt="">
+                            <img class="card-img rounded-0" src="{{ asset('storage/' . $product->image) }}" alt="">
                             <ul class="thumb-info">
-                            <li><a href="#">Adam Colinge</a></li>
-                            <li><a href="#">Dec 15</a></li>
+                            <li><a href="#">{{ $product->user->name }}</a></li>
+                            <li><a href="#">{{ $product->user->created_at }}</a></li>
                             </ul>
                         </div>
                         <div class="details mt-20">
                             <a href="blog-single.html">
-                            <h6>Accused of assaulting flight attendant miktake alaways</h6>
+                            <h6>{{ $product->description }}</h6>
                             </a>
                         </div>
-                        </div>
-                        <div class="single-post-list">
-                        <div class="thumb">
-                            <img class="card-img rounded-0" src="{{asset("assets/img")}}/blog/thumb/thumb2.png" alt="">
-                            <ul class="thumb-info">
-                            <li><a href="#">Adam Colinge</a></li>
-                            <li><a href="#">Dec 15</a></li>
-                            </ul>
-                        </div>
-                        <div class="details mt-20">
-                            <a href="blog-single.html">
-                            <h6>Tennessee outback steakhouse the
-                                worker diagnosed</h6>
-                            </a>
-                        </div>
-                        </div>
-                        <div class="single-post-list">
-                        <div class="thumb">
-                            <img class="card-img rounded-0" src="{{asset("assets/img")}}/blog/thumb/thumb3.png" alt="">
-                            <ul class="thumb-info">
-                            <li><a href="#">Adam Colinge</a></li>
-                            <li><a href="#">Dec 15</a></li>
-                            </ul>
-                        </div>
-                        <div class="details mt-20">
-                            <a href="blog-single.html">
-                            <h6>Tennessee outback steakhouse the
-                                worker diagnosed</h6>
-                            </a>
-                        </div>
-                        </div>
+                    </div>
+                    @endforeach
+                    @endif
                     </div>
                     </div>
                 </div>
